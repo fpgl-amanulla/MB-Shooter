@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 7237040632769931938}
   - component: {fileID: 3005365445352957259}
   - component: {fileID: 5195476501092730739}
-  - component: {fileID: 8594451013600191474}
+  - component: {fileID: -4515369279888462586}
   m_Layer: 0
   m_Name: BulletPrefab
   m_TagString: Untagged
@@ -193,7 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944695471f35443da7f83c36e3707a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 100
+  _damagePower: 10
+  _speed: 75
   _trailRenderer: {fileID: 9148658482777179600}
   _hitImpact: {fileID: 19800002, guid: aea213032182748e8b589986c5f745b3, type: 3}
 --- !u!136 &5195476501092730739
@@ -219,7 +220,7 @@ CapsuleCollider:
   m_Height: 0.5
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &8594451013600191474
+--- !u!54 &-4515369279888462586
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -245,7 +246,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1001 &494538242718578869
 PrefabInstance:
   m_ObjectHideFlags: 0
