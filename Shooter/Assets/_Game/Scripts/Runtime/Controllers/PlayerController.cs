@@ -1,4 +1,5 @@
 using System;
+using _Game.Managers;
 using _Game.Scripts.Runtime.Interface;
 using _Game.UI;
 using _Tools.Helpers;
@@ -16,6 +17,8 @@ namespace _Game.Scripts.Runtime.Controllers
 
         [ReadOnly, ShowInInspector] private float _currentHealth;
 
+        private bool _isDied;
+
         private void Start()
         {
             _weaponMovementController = GetComponent<WeaponMovementController>();
@@ -29,8 +32,15 @@ namespace _Game.Scripts.Runtime.Controllers
 
         public void TakeDamage(float amount)
         {
+            if (_isDied) return;
+            
             _currentHealth -= amount;
             PlayerHealthUI.Instance.UpdateHealthBar(_currentHealth / _maxHealth);
+            if (_currentHealth <= 0)
+            {
+                _isDied = true;
+                GameManager.Instance.LevelFail();
+            }
         }
     }
 }

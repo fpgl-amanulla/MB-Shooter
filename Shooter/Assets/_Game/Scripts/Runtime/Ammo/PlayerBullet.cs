@@ -13,9 +13,14 @@ namespace _Game.Scripts.Runtime.Ammo
 
         [Space(10)] [SerializeField] private ParticleSystem _hitImpact;
 
+        private void Start()
+        {
+            LeanPool.Despawn(this, 2f);
+        }
+
         private void Update()
         {
-            transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+            transform.Translate(Vector3.forward * (_speed * Time.deltaTime));
         }
 
         private void OnTriggerEnter(Collider other)

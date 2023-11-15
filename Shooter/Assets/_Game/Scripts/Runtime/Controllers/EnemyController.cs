@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
+using _Game.Managers;
+using _Game.Scripts.Runtime.DataManager;
 using _Game.Scripts.Runtime.Interface;
 using _Tools.Extensions;
+using Lean.Pool;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +17,7 @@ namespace _Game.Scripts.Runtime.Controllers
         [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
         [SerializeField] private GameObject _gunObj;
 
+        [FoldoutGroup("Attributes")] [SerializeField] private int _damagePower = 10;
         [FoldoutGroup("Attributes")] [SerializeField] private float _rotationSmoothness = 1200;
         [FoldoutGroup("Attributes")] [SerializeField] private float _movementSpeed = 10;
         [FoldoutGroup("Attributes")] [SerializeField] private float _stoppingDistance = 2;
@@ -55,7 +59,7 @@ namespace _Game.Scripts.Runtime.Controllers
                 if (GetStoppingDistance() < _stoppingDistance)
                 {
                     _canMove = false;
-                    PlayerController.Instance.TakeDamage(10);
+                    PlayerController.Instance.TakeDamage(_damagePower);
                     Destroy(gameObject);
                 }
             }
@@ -79,7 +83,11 @@ namespace _Game.Scripts.Runtime.Controllers
                 _canMove = false;
                 _animator.SetTrigger(Die);
                 _healthBar.SetActive(false);
+
+                GameDataManager.Instance.UpdateKillCount();
+
                 DropGun();
+                Destroy(gameObject, 2.0f);
             }
         }
 

@@ -1,4 +1,5 @@
 using System;
+using _Game.Managers;
 using _Game.Scripts.Runtime.Ammo;
 using DG.Tweening;
 using Lean.Pool;
@@ -25,6 +26,8 @@ namespace _Game.Scripts.Runtime.Controllers
 
         private void Update()
         {
+            if(GameManager.Instance.IsGameOver) return;
+            
             _isFireEnabled = Input.GetMouseButton(0);
 
             if (CanFire())

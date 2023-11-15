@@ -21,12 +21,15 @@ namespace _Game.Managers
 
         #endregion
 
+        public bool IsGameOver { get; set; }
+
         #region Custom Methods
 
         public void LevelStart() => OnLevelStart?.Invoke();
 
         public void LevelComplete()
         {
+            IsGameOver = true;
             OnLevelComplete?.Invoke();
             
             var nextSceneIndex = LevelManager.Instance.GetNextSceneIndex();
@@ -38,6 +41,7 @@ namespace _Game.Managers
 
         public void LevelFail()
         {
+            IsGameOver = true;
             OnLevelFail?.Invoke();
             
             if (UIManager.Instance.IsNotNull(nameof(UIManager))) UIManager.Instance.LevelReloadTransition(_levelLoadDelay, SceneUtils.ReloadScene);

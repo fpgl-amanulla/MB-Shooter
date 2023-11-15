@@ -1,3 +1,5 @@
+using _Game.Managers;
+using _Game.Scripts.Runtime.DataManager;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -18,6 +20,8 @@ namespace _Game.Scripts.Runtime.Controllers
 
         private void Update()
         {
+            if(GameManager.Instance.IsGameOver) return;
+            
             if (Input.GetMouseButtonDown(0)) StartDragging();
             else if (Input.GetMouseButtonUp(0)) StopDragging();
 
