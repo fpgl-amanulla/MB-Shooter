@@ -33,7 +33,7 @@ namespace _Game.Scripts.Runtime.Controllers
         public void TakeDamage(float amount)
         {
             if (_isDied) return;
-            
+
             _currentHealth -= amount;
             PlayerHealthUI.Instance.UpdateHealthBar(_currentHealth / _maxHealth);
             if (_currentHealth <= 0)
@@ -42,5 +42,7 @@ namespace _Game.Scripts.Runtime.Controllers
                 GameManager.Instance.LevelFail();
             }
         }
+
+        public Transform GetFirePoint() => _weaponShootingController.FirePointTr;
     }
 }

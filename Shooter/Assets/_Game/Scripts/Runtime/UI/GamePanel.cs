@@ -5,6 +5,7 @@ using _Tools.Extensions;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _Game.UI
 {
@@ -13,6 +14,9 @@ namespace _Game.UI
         [SerializeField] private GameObject _visual;
         [SerializeField] private TextMeshProUGUI _killCountText;
         [SerializeField] private TextMeshProUGUI _timeCountText;
+        [SerializeField] private Button _pauseButton;
+        [SerializeField] private Button _unpauseButton;
+        [SerializeField] private GameObject _pausePanel;
 
         private float _timeCounter;
         private bool _shouldCountTime;
@@ -21,9 +25,23 @@ namespace _Game.UI
         private void Start()
         {
             _visual.SetActive(false);
+            _pausePanel.SetActive(false);
             GameManager.Instance.OnLevelStart += OnLevelStart;
             GameManager.Instance.OnLevelFail += OnLevelFail;
             GameEventManager.Instance.onEnemyKilled += UpdateKillCount;
+
+            _pauseButton.onClick.AddListener(() =>
+            {
+                Time.timeScale = 0;
+                _pauseButton.gameObject.SetActive(false);
+                _pausePanel.SetActive(true);
+            });
+            _unpauseButton.onClick.AddListener(() =>
+            {
+                Time.timeScale = 1;
+                _pauseButton.gameObject.SetActive(true);
+                _pausePanel.SetActive(false);
+            });
         }
 
         private void Update()

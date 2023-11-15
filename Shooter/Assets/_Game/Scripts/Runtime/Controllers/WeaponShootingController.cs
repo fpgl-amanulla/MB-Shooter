@@ -24,6 +24,8 @@ namespace _Game.Scripts.Runtime.Controllers
 
         private float _timeCounter;
 
+        public Transform FirePointTr => _firePointTr;
+
         private void Update()
         {
             if(GameManager.Instance.IsGameOver) return;
@@ -51,7 +53,7 @@ namespace _Game.Scripts.Runtime.Controllers
 
         private void Shake()
         {
-            _weaponTr.transform.DOShakeScale(.08f, .05f);
+            //_weaponTr.transform.DOShakeScale(.08f, .05f);
         }
 
         private bool CanFire()
