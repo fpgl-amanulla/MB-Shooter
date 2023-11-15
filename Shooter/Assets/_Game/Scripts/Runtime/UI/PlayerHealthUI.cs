@@ -29,10 +29,10 @@ namespace _Game.UI
             GameManager.Instance.OnLevelFail -= OnLevelFail;
         }
 
-        public void TakeDamage(float amount)
+        public void UpdateHealthBar(float amount, bool shouldSplash = true)
         {
             _fillImage.fillAmount = amount;
-            StartCoroutine(HealthFlash());
+            if (shouldSplash) StartCoroutine(HealthFlash());
         }
 
         private IEnumerator HealthFlash()

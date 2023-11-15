@@ -412,6 +412,9 @@ MonoBehaviour:
   _animator: {fileID: 82195574449403594}
   _skinnedMeshRenderer: {fileID: 7283130803145904982}
   _gunObj: {fileID: 9075231878975377200}
+  _rotationSmoothness: 1200
+  _movementSpeed: 1
+  _stoppingDistance: 5
   _maxHealth: 100
   _fillImage: {fileID: 2023597322333958184}
   _healthBar: {fileID: 5414452879836908784}

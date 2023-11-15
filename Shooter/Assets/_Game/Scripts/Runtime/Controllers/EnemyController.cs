@@ -14,6 +14,10 @@ namespace _Game.Scripts.Runtime.Controllers
         [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
         [SerializeField] private GameObject _gunObj;
 
+        [FoldoutGroup("Attributes")] [SerializeField] private float _rotationSmoothness = 1200;
+        [FoldoutGroup("Attributes")] [SerializeField] private float _movementSpeed = 10;
+        [FoldoutGroup("Attributes")] [SerializeField] private float _stoppingDistance = 2;
+
         [FoldoutGroup("HealthBar")] [SerializeField] private float _maxHealth = 100;
         [FoldoutGroup("HealthBar")] [SerializeField] private Image _fillImage;
         [FoldoutGroup("HealthBar")] [SerializeField] private GameObject _healthBar;
@@ -21,15 +25,43 @@ namespace _Game.Scripts.Runtime.Controllers
         private float _currentHealth;
         private bool _isDied;
         private Color _heathBarColor;
+        private bool _canMove;
+        private Transform _playerTr;
 
         private static readonly int Die = Animator.StringToHash("Die");
+        private static readonly int IsRunning = Animator.StringToHash("IsRunning");
 
         private void Start()
         {
+            _canMove = true;
             _currentHealth = _maxHealth;
             _heathBarColor = _fillImage.color;
             UpdateHealthBar();
+
+            _playerTr = PlayerController.Instance.GetPlayerTr();
         }
+
+        private void Update()
+        {
+            if (_canMove)
+            {
+                _animator.SetBool(IsRunning, true);
+                Vector3 direction = _playerTr.position - transform.position;
+                Quaternion lookRotation = Quaternion.LookRotation(direction.Flat(), Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, _rotationSmoothness * Time.deltaTime);
+
+                transform.Translate(Vector3.forward * (_movementSpeed * Time.deltaTime));
+
+                if (GetStoppingDistance() < _stoppingDistance)
+                {
+                    _canMove = false;
+                    PlayerController.Instance.TakeDamage(10);
+                    Destroy(gameObject);
+                }
+            }
+        }
+
+        private float GetStoppingDistance() => Vector3.Distance(transform.position, _playerTr.position);
 
         public void TakeDamage(float amount)
         {
@@ -37,13 +69,14 @@ namespace _Game.Scripts.Runtime.Controllers
 
             _currentHealth -= amount;
             UpdateHealthBar();
-            
+
             _skinnedMeshRenderer.MaterialSplashEffect(Color.white, Color.red, .08f);
             StartCoroutine(HealthFlash());
-            
+
             if (_currentHealth <= 0)
             {
                 _isDied = true;
+                _canMove = false;
                 _animator.SetTrigger(Die);
                 _healthBar.SetActive(false);
                 DropGun();
