@@ -46,6 +46,9 @@ namespace _Game.UI
             OnLoadScene = onTransitionComplete;
             _totalKillCountText.text = "Total Kill: " + GameDataManager.Instance.GetTotalKillCount();
             _totalTimeSurvived.text = "Survived Time: " + GameDataManager.Instance.GetSurvivedTime().GetFloatToClockFormat();
+            GameDataManager.Instance.CheckBestKill();
+            GameDataManager.Instance.CheckTimeSurvived();
+            GameDataManager.Instance.ResetData();
             _visual.SetActive(true);
             //LevelReloadTransition(duration, onTransitionComplete);
         }
