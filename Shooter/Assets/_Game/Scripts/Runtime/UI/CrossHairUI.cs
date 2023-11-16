@@ -23,7 +23,7 @@ namespace _Game.UI
             GameManager.Instance.OnLevelStart += () => { _crossHair.gameObject.SetActive(true); };
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             if (GameManager.Instance.IsGameOver)
             {
@@ -38,7 +38,7 @@ namespace _Game.UI
         {
             Vector3 gunTipPoint = _firePointTr.position;
             Vector3 gunForward = _firePointTr.forward;
-            Vector3 hitPoint = gunTipPoint + gunForward * 20;
+            Vector3 hitPoint = gunTipPoint + gunForward * 10;
 
             if (Physics.Raycast(gunTipPoint, gunForward, out RaycastHit hit, float.MaxValue, _layerMask))
             {
@@ -47,13 +47,14 @@ namespace _Game.UI
 
             Vector3 screenSpaceLocation = _camera.WorldToScreenPoint(hitPoint);
 
+            Vector2 position = _crossHair.rectTransform.anchoredPosition;
             if (RectTransformUtility.ScreenPointToLocalPointInRectangle(_canvas, screenSpaceLocation, null, out Vector2 localPoint))
             {
-                _crossHair.rectTransform.anchoredPosition = localPoint;
+                _crossHair.rectTransform.anchoredPosition = Vector2.Lerp(position, localPoint, 0.05f);
             }
             else
             {
-                _crossHair.rectTransform.anchoredPosition = Vector2.zero;
+                _crossHair.rectTransform.anchoredPosition = Vector2.Lerp(position, Vector2.zero, 0.05f);
             }
         }
     }

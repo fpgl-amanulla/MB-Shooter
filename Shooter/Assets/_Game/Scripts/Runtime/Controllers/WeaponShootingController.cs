@@ -11,6 +11,7 @@ namespace _Game.Scripts.Runtime.Controllers
     {
         [SerializeField] private float _delayTime = .5f;
         [SerializeField] private Transform _weaponTr;
+        [SerializeField] private CameraShake _cameraShake;
 
         [Space(10)] [SerializeField] private BulletBase _bulletBasePrefab;
         [SerializeField] private Transform _firePointTr;
@@ -28,8 +29,8 @@ namespace _Game.Scripts.Runtime.Controllers
 
         private void Update()
         {
-            if(GameManager.Instance.IsGameOver) return;
-            
+            if (GameManager.Instance.IsGameOver) return;
+
             _isFireEnabled = Input.GetMouseButton(0);
 
             if (CanFire())
@@ -53,7 +54,8 @@ namespace _Game.Scripts.Runtime.Controllers
 
         private void Shake()
         {
-            //_weaponTr.transform.DOShakeScale(.08f, .05f);
+            _weaponTr.transform.DOShakeScale(.08f, .05f);
+            _cameraShake.ShakeCaller(0.2f, 0.1f);
         }
 
         private bool CanFire()

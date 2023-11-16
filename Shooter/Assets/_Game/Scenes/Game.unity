@@ -1370,6 +1370,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mountain (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1a180a6f4bb294280b212b5d590fdeb2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1544,7 +1549,7 @@ GameObject:
   - component: {fileID: 997320201}
   - component: {fileID: 997320200}
   - component: {fileID: 997320199}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1923,11 +1928,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c1d411bddd3947789f0e565f382a42d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 30
+  rotationSpeed: 10
   minHorizontalRotation: -20
   maxHorizontalRotation: 20
-  minVerticalRotation: -7
-  maxVerticalRotation: 5
+  minVerticalRotation: -10
+  maxVerticalRotation: 10
 --- !u!114 &1216149104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1942,6 +1947,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _delayTime: 0.1
   _weaponTr: {fileID: 1062994086}
+  _cameraShake: {fileID: 1942061086}
   _bulletBasePrefab: {fileID: 3005365445352957259, guid: 2e6cced1dd82d4bfb8f950faf3f18a04,
     type: 3}
   _firePointTr: {fileID: 1991502503}
@@ -2158,7 +2164,7 @@ GameObject:
   - component: {fileID: 1335454676}
   - component: {fileID: 1335454675}
   - component: {fileID: 1335454674}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2244,8 +2250,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1335454673}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.49259514, y: 115.55282, z: 58.480316}
-  m_LocalScale: {x: 5000, y: 2500, z: 0.1}
+  m_LocalPosition: {x: -0.49259514, y: 970, z: 176}
+  m_LocalScale: {x: 5000, y: 2500, z: 50}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2403,7 +2409,7 @@ MonoBehaviour:
   _firePointTr: {fileID: 1991502503}
   _layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 448
 --- !u!1 &1398198830 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1a180a6f4bb294280b212b5d590fdeb2,
@@ -2946,6 +2952,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mountain (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1a180a6f4bb294280b212b5d590fdeb2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3055,6 +3066,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Mountain
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1a180a6f4bb294280b212b5d590fdeb2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3230,6 +3246,7 @@ GameObject:
   - component: {fileID: 1942061083}
   - component: {fileID: 1942061082}
   - component: {fileID: 1942061085}
+  - component: {fileID: 1942061086}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3356,6 +3373,18 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &1942061086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942061081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 558e9da1e6c3471e9a7a4487fbcad155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1973241757
 PrefabInstance:
   m_ObjectHideFlags: 0
